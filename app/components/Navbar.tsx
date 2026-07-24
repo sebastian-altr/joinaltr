@@ -4,8 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 const links = [
   { label: "Communities", href: "/communities" },
+  { label: "Profile", href: "/profile" },
   { label: "About", href: "/about" },
-  { label: "Waitlist", href: "/waitlist" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
