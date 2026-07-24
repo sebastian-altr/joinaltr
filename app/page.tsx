@@ -32,22 +32,22 @@ const communities = [
   {
     initials: "BM",
     title: "Build Muscle",
-    members: "24,812 members",
+    members: "0 members",
   },
   {
     initials: "CS",
     title: "Clear Skin",
-    members: "18,421 members",
+    members: "0 members",
   },
   {
     initials: "HH",
     title: "Healthy Habits",
-    members: "31,278 members",
+    members: "0 members",
   },
   {
     initials: "BS",
     title: "Better Style",
-    members: "12,006 members",
+    members: "0 members",
   },
 ];
 
@@ -334,12 +334,28 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-white/10 px-6 py-8 sm:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 text-sm text-gray-500 sm:flex-row">
-          <p>© 2026 JoinAltr.</p>
-          <p>Become more, together.</p>
-        </div>
-      </footer>
+      <footer className="border-t border-white/10 px-6 py-10">
+  <div className="mx-auto max-w-6xl text-center">
+    <h3 className="text-lg font-semibold text-white">
+      JoinAltr
+    </h3>
+
+    <p className="mt-3 text-gray-400">
+      The internet&apos;s home for healthy self-improvement.
+    </p>
+
+    <a
+      href="mailto:hello@joinaltr.com"
+      className="mt-4 block text-gray-400 transition hover:text-white"
+    >
+      hello@joinaltr.com
+    </a>
+
+    <p className="mt-6 text-sm text-gray-500">
+      © 2026 JoinAltr. All rights reserved.
+    </p>
+  </div>
+</footer>
     </main>
   );
 }
