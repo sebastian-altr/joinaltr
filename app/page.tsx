@@ -213,21 +213,11 @@ export default function HomePage() {
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/signup"
-                className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-8 py-4 font-semibold text-black transition duration-300 hover:-translate-y-1 hover:bg-gray-200"
-              >
-                Join the beta
-                <span className="transition group-hover:translate-x-1">→</span>
-              </Link>
-
-              <Link
-                href="/communities"
-                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.025] px-8 py-4 font-semibold transition duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06]"
-              >
-                Explore communities
-              </Link>
-            </div>
+</div>
+<p className="mt-6 text-sm leading-6 text-gray-500">
+  JoinAltr is currently in open beta. We&apos;re building alongside our
+  earliest members.
+</p>
 
             <div className="mt-14 grid max-w-2xl gap-5 border-t border-white/10 pt-7 sm:grid-cols-3">
               <div>
