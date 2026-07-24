@@ -55,6 +55,12 @@ export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
       <section className="relative min-h-screen border-b border-white/10">
+      <div className="relative z-20 border-b border-emerald-400/20 bg-emerald-400/10 py-3 text-center">
+  <p className="text-sm font-medium text-emerald-300">
+    JoinAltr is currently in private beta. Join the waitlist to get early
+    access.
+  </p>
+</div>
         <div className="absolute left-1/2 top-[-250px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[180px]" />
         <div className="absolute right-[-220px] top-[260px] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[180px]" />
 
