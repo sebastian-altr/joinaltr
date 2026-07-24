@@ -1,4 +1,64 @@
+"use client";
+
+import { FormEvent, useState } from "react";
+
 export default function WaitlistPage() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    setIsSubmitting(true);
+    setStatus(null);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const submission = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      goal: formData.get("goal"),
+      comments: formData.get("comments"),
+    };
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submission),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Submission failed.");
+      }
+
+      setStatus({
+        type: "success",
+        message: "You’re on the waitlist! We’ll be in touch.",
+      });
+
+      form.reset();
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main className="min-h-screen bg-[#050505] px-6 py-20 text-white">
       <div className="mx-auto max-w-2xl">
@@ -23,23 +83,7 @@ export default function WaitlistPage() {
             of healthy self-improvement.
           </p>
 
-          <form
-            action="https://formsubmit.co/hello@joinaltr.com"
-            method="POST"
-            className="mt-10 space-y-5"
-          >
-            <input
-              type="hidden"
-              name="_subject"
-              value="New JoinAltr waitlist signup"
-            />
-
-            <input
-              type="hidden"
-              name="_captcha"
-              value="false"
-            />
-
+          <form onSubmit={handleSubmit} className="mt-10 space-y-5">
             <div>
               <label
                 htmlFor="name"
@@ -53,7 +97,8 @@ export default function WaitlistPage() {
                 name="name"
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-400"
+                disabled={isSubmitting}
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
                 placeholder="Your name"
               />
             </div>
@@ -71,7 +116,8 @@ export default function WaitlistPage() {
                 name="email"
                 type="email"
                 required
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-400"
+                disabled={isSubmitting}
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
                 placeholder="you@example.com"
               />
             </div>
@@ -81,30 +127,64 @@ export default function WaitlistPage() {
                 htmlFor="goal"
                 className="mb-2 block text-sm font-medium text-gray-300"
               >
-                What are you working on?
+                Which community interests you most?
               </label>
 
               <select
                 id="goal"
                 name="goal"
                 required
-                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-emerald-400"
+                defaultValue=""
+                disabled={isSubmitting}
+                className="w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition focus:border-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <option value="">Choose one</option>
+                <option value="" disabled>
+                  Choose one
+                </option>
                 <option value="Fitness">Fitness</option>
                 <option value="Skincare">Skincare</option>
                 <option value="Nutrition">Nutrition</option>
-                <option value="Sleep">Sleep</option>
-                <option value="Style">Style</option>
                 <option value="Confidence">Confidence</option>
               </select>
             </div>
 
+            <div>
+              <label
+                htmlFor="comments"
+                className="mb-2 block text-sm font-medium text-gray-300"
+              >
+                Anything else you would like us to know?
+              </label>
+
+              <textarea
+                id="comments"
+                name="comments"
+                rows={5}
+                disabled={isSubmitting}
+                className="w-full resize-none rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-white outline-none transition placeholder:text-gray-600 focus:border-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
+                placeholder="Tell us what you would like to see from JoinAltr..."
+              />
+            </div>
+
+            {status && (
+              <div
+                role="status"
+                className={`rounded-xl border px-4 py-3 text-sm ${
+                  status.type === "success"
+                    ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+                    : "border-red-400/30 bg-red-400/10 text-red-300"
+                }`}
+              >
+                {status.message}
+              </div>
+            )}
+
             <button
               type="submit"
-              className="w-full rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:bg-gray-200"
+              disabled={isSubmitting}
+              className="w-full rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Join the Waitlist
+              {isSubmitting ? "Joining..." : "Join the Waitlist"}
             </button>
           </form>
         </div>
