@@ -1,3 +1,4 @@
+import Image from "next/image";
 const pillars = [
   "Fitness",
   "Skincare",
@@ -65,12 +66,20 @@ export default function Home() {
         <div className="absolute right-[-220px] top-[260px] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[180px]" />
 
         <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-7 sm:px-10">
-          <a href="#" className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white font-bold text-black">
-              A
-            </div>
-            <span className="text-xl font-bold tracking-tight">JoinAltr</span>
-          </a>
+          <a href="/" className="flex items-center gap-0.25">
+  <Image
+    src="/joinaltr-logo.png"
+    alt="JoinAltr Logo"
+    width={64}
+    height={64}
+    priority
+    className="object-contain"
+  />
+
+  <span className="text-xl font-semibold tracking-tight">
+    JoinAltr
+  </span>
+</a>
 
          <div className="hidden items-center gap-8 text-sm text-gray-400 md:flex">
   <a href="/" className="transition hover:text-white">
