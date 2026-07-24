@@ -10,14 +10,14 @@ const communities = [
     glow: "from-emerald-400/15",
   },
   {
-    title: "Skincare",
+    title: "Confidence",
     description:
-      "Build routines, document progress, and learn from people navigating their own skincare journeys.",
-    href: "/communities/skincare",
-    label: "Routines & progress",
-    accent: "text-rose-300",
-    border: "hover:border-rose-300/60",
-    glow: "from-rose-300/15",
+      "Build self-belief, face discomfort, and become more comfortable expressing who you are.",
+    href: "/communities/confidence",
+    label: "Growth & self-belief",
+    accent: "text-violet-400",
+    border: "hover:border-violet-400/60",
+    glow: "from-violet-400/15",
   },
   {
     title: "Nutrition",
@@ -30,15 +30,17 @@ const communities = [
     glow: "from-orange-300/15",
   },
   {
-    title: "Confidence",
+    title: "Skincare",
     description:
-      "Build self-belief, face discomfort, and become more comfortable expressing who you are.",
-    href: "/communities/confidence",
-    label: "Growth & self-belief",
-    accent: "text-violet-400",
-    border: "hover:border-violet-400/60",
-    glow: "from-violet-400/15",
+      "Build routines, document progress, and learn from people navigating their own skincare journeys.",
+    href: "/communities/skincare",
+    label: "Routines & progress",
+    accent: "text-rose-300",
+    border: "hover:border-rose-300/60",
+    glow: "from-rose-300/15",
   },
+  
+  
 ];
 
 export default function CommunitiesPage() {
