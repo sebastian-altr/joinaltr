@@ -6,105 +6,75 @@ const communities = [
     description:
       "Build strength, improve your routine, and learn from people working toward similar goals.",
     href: "/communities/fitness",
+    label: "Build strength",
     accent: "text-emerald-300",
     border: "border-emerald-400/20",
     background:
       "from-emerald-400/[0.16] via-emerald-400/[0.05] to-transparent",
     glow: "group-hover:shadow-emerald-950/40",
-    icon: "01",
   },
   {
     name: "Confidence",
     description:
-      "Practice taking action, speaking up, and becoming more comfortable being seen.",
+      "Take action, speak up, and become more comfortable doing the things you usually overthink.",
     href: "/communities/confidence",
+    label: "Take action",
     accent: "text-violet-300",
     border: "border-violet-400/20",
     background:
       "from-violet-400/[0.16] via-violet-400/[0.05] to-transparent",
     glow: "group-hover:shadow-violet-950/40",
-    icon: "02",
   },
   {
     name: "Nutrition",
     description:
       "Build healthier eating habits through practical advice and shared experience.",
     href: "/communities/nutrition",
+    label: "Eat better",
     accent: "text-orange-300",
     border: "border-orange-300/20",
     background:
       "from-orange-300/[0.16] via-orange-300/[0.05] to-transparent",
     glow: "group-hover:shadow-orange-950/40",
-    icon: "03",
   },
   {
     name: "Skincare",
     description:
       "Discuss routines, products, setbacks, and progress with people who understand.",
     href: "/communities/skincare",
+    label: "Feel confident",
     accent: "text-sky-300",
     border: "border-sky-300/20",
     background:
       "from-sky-300/[0.16] via-sky-300/[0.05] to-transparent",
     glow: "group-hover:shadow-sky-950/40",
-    icon: "04",
   },
 ];
 
-const feedItems = [
+const activityItems = [
   {
-    initials: "AM",
-    name: "Community Member",
-    community: "Confidence",
-    post: "Did something today I would normally overthink for a week.",
-    helpful: "__*",
-    time: "Today*",
-    accent: "from-violet-400/20 to-fuchsia-400/10",
-  },
-  {
-    initials: "JT",
-    name: "Community Member",
+    initials: "FM",
+    member: "Fitness member",
     community: "Fitness",
-    post: "Completed my first full week of training without missing a planned session.",
-    helpful: "__*",
-    time: "Today*",
+    post: "Went to the gym even though I really didn’t feel like going. Glad I did.",
+    helpful: "__",
     accent: "from-emerald-400/20 to-teal-400/10",
   },
   {
-    initials: "RK",
-    name: "Community Member",
+    initials: "CM",
+    member: "Confidence member",
+    community: "Confidence",
+    post: "Did something today I would normally overthink for a week.",
+    helpful: "__",
+    accent: "from-violet-400/20 to-fuchsia-400/10",
+  },
+  {
+    initials: "NM",
+    member: "Nutrition member",
     community: "Nutrition",
-    post: "Meal prepping twice a week has made eating well feel much less complicated.",
-    helpful: "__*",
-    time: "Yesterday*",
+    post: "Meal prepping twice a week made eating well feel much less complicated.",
+    helpful: "__",
     accent: "from-orange-300/20 to-amber-300/10",
-  },
-];
-
-const principles = [
-  {
-    number: "01",
-    title: "Progress over popularity.",
-    description:
-      "The goal isn't to appear impressive. It's to become better.",
-  },
-  {
-    number: "02",
-    title: "Contribution over attention.",
-    description:
-      "Recognition should come from helping people, not collecting views.",
-  },
-  {
-    number: "03",
-    title: "Honesty over performance.",
-    description:
-      "Real setbacks and useful lessons matter more than perfect updates.",
-  },
-  {
-    number: "04",
-    title: "People before metrics.",
-    description:
-      "Numbers should support meaningful interaction, not replace it.",
   },
 ];
 
@@ -113,23 +83,23 @@ const steps = [
     number: "01",
     title: "Create your profile",
     description:
-      "Share what you're working on, where you want to improve, and what you can help others with.",
+      "Share what you are working on, what you have learned, and where you want to improve.",
   },
   {
     number: "02",
-    title: "Find your communities",
+    title: "Join communities",
     description:
-      "Join conversations with people facing similar goals, questions, and setbacks.",
+      "Find people dealing with similar goals, questions, setbacks, and experiences.",
   },
   {
     number: "03",
-    title: "Post and participate",
+    title: "Take part",
     description:
-      "Ask honest questions, share useful experiences, and support other members.",
+      "Ask questions, share progress, offer useful advice, and support other members.",
   },
   {
     number: "04",
-    title: "Build a reputation",
+    title: "Build your reputation",
     description:
       "Earn appreciation when people find your posts, replies, and encouragement helpful.",
   },
@@ -149,7 +119,7 @@ const tiers = [
   {
     name: "Bronze",
     range: "25–99 👍",
-    description: "Recognized for beginning to help others.",
+    description: "Recognized for beginning to help other members.",
     border: "border-orange-700/35",
     background:
       "bg-gradient-to-br from-orange-800/[0.16] via-orange-950/[0.08] to-transparent",
@@ -193,7 +163,7 @@ const tiers = [
   {
     name: "Legend",
     range: "1000+ 👍",
-    description: "Reserved for people whose impact is impossible to miss.",
+    description: "For members whose positive impact is impossible to miss.",
     border: "border-violet-400/35",
     background:
       "bg-gradient-to-br from-violet-400/[0.18] via-fuchsia-400/[0.08] to-amber-300/[0.08]",
@@ -204,31 +174,36 @@ const tiers = [
   },
 ];
 
+const principles = [
+  "Progress over popularity",
+  "Contribution over attention",
+  "Honesty over performance",
+  "People before metrics",
+];
+
 export default function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
       <section className="relative isolate min-h-[calc(100vh-80px)]">
         <div className="pointer-events-none absolute inset-0 -z-20 bg-[linear-gradient(to_right,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:linear-gradient(to_bottom,black,transparent_92%)]" />
 
-        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[640px] w-[900px] -translate-x-1/2 rounded-full bg-emerald-400/[0.08] blur-[150px]" />
+        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[640px] w-[950px] -translate-x-1/2 rounded-full bg-emerald-400/[0.08] blur-[150px]" />
 
         <div className="pointer-events-none absolute -right-56 top-64 -z-10 h-[520px] w-[520px] rounded-full bg-violet-400/[0.09] blur-[150px]" />
-
-        <div className="pointer-events-none absolute -left-48 top-[600px] -z-10 h-[420px] w-[420px] rounded-full bg-sky-400/[0.05] blur-[140px]" />
 
         <div className="mx-auto grid max-w-[1400px] gap-16 px-6 pb-24 pt-20 sm:px-10 lg:grid-cols-[1.03fr_0.97fr] lg:items-center lg:pb-32 lg:pt-28">
           <div className="relative z-10">
             <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-black/30 px-4 py-2 text-sm text-gray-300 backdrop-blur-xl">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-40" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
               </span>
 
-              An open private beta for people ready to grow
+              Open private beta — anyone can join
             </div>
 
             <h1 className="mt-9 max-w-5xl text-5xl font-bold leading-[0.94] tracking-[-0.065em] sm:text-7xl lg:text-[88px]">
-              Be the person you&apos;ve been trying to become.
+              Become the person you&apos;ve been trying to be.
             </h1>
 
             <p className="mt-8 max-w-xl text-lg leading-8 text-gray-400 sm:text-xl">
@@ -242,8 +217,7 @@ export default function HomePage() {
                 href="/signup"
                 className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-8 py-4 font-semibold text-black transition duration-300 hover:-translate-y-1 hover:bg-gray-200"
               >
-                Create your profile
-
+                Join the beta
                 <span className="transition group-hover:translate-x-1">→</span>
               </Link>
 
@@ -260,7 +234,6 @@ export default function HomePage() {
                 <p className="text-sm font-semibold text-white">
                   No follower counts
                 </p>
-
                 <p className="mt-2 text-sm leading-6 text-gray-500">
                   Less performance. More progress.
                 </p>
@@ -270,7 +243,6 @@ export default function HomePage() {
                 <p className="text-sm font-semibold text-white">
                   Useful recognition
                 </p>
-
                 <p className="mt-2 text-sm leading-6 text-gray-500">
                   Earn status by helping people.
                 </p>
@@ -278,11 +250,10 @@ export default function HomePage() {
 
               <div>
                 <p className="text-sm font-semibold text-white">
-                  Real communities
+                  Shared experience
                 </p>
-
                 <p className="mt-2 text-sm leading-6 text-gray-500">
-                  Connect around shared goals.
+                  Connect around real goals.
                 </p>
               </div>
             </div>
@@ -293,7 +264,7 @@ export default function HomePage() {
 
             <div className="relative rounded-[42px] border border-white/10 bg-black/50 p-3 shadow-2xl shadow-black/60 backdrop-blur-xl">
               <div className="absolute -right-4 -top-4 z-20 rounded-full border border-violet-400/25 bg-[#0b0710] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-violet-200 shadow-lg shadow-violet-950/40">
-                Under development
+                Product preview
               </div>
 
               <div className="overflow-hidden rounded-[34px] border border-white/10 bg-[#0a0a0a]">
@@ -326,7 +297,7 @@ export default function HomePage() {
                         </h2>
 
                         <span className="rounded-full border border-yellow-400/25 bg-yellow-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-yellow-200">
-                          Gold*
+                          Gold
                         </span>
                       </div>
 
@@ -334,9 +305,7 @@ export default function HomePage() {
                         @yourusername
                       </p>
 
-                      <p className="mt-3 font-semibold text-gray-300">
-                        __* 👍
-                      </p>
+                      <p className="mt-3 font-semibold text-gray-300">__ 👍</p>
                     </div>
                   </div>
 
@@ -347,16 +316,15 @@ export default function HomePage() {
 
                   <div className="relative mt-7 grid grid-cols-3 gap-3">
                     {[
-                      ["__*", "Helpful replies"],
-                      ["__*", "Communities"],
-                      ["__*", "Days active"],
+                      ["__", "Helpful replies"],
+                      ["__", "Communities"],
+                      ["__", "Days active"],
                     ].map(([value, label]) => (
                       <div
                         key={label}
                         className="rounded-2xl border border-white/10 bg-black/30 p-4"
                       >
                         <p className="text-2xl font-bold">{value}</p>
-
                         <p className="mt-1 text-xs leading-5 text-gray-500">
                           {label}
                         </p>
@@ -389,10 +357,12 @@ export default function HomePage() {
                     <div className="relative">
                       <div className="flex items-center justify-between gap-5">
                         <p className="text-sm font-semibold text-emerald-300">
-                          Recent contribution*
+                          Recent contribution
                         </p>
 
-                        <span className="text-xs text-gray-600">Today*</span>
+                        <span className="text-xs text-gray-600">
+                          Illustrative
+                        </span>
                       </div>
 
                       <p className="mt-3 leading-7 text-gray-300">
@@ -402,14 +372,14 @@ export default function HomePage() {
 
                       <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
                         <span>👍</span>
-                        <span>__* members found this helpful</span>
+                        <span>__ members found this helpful</span>
                       </div>
                     </div>
                   </div>
 
                   <p className="mt-5 text-xs leading-5 text-gray-600">
-                    *Illustrative examples of features and activity planned for
-                    JoinAltr as the platform develops.
+                    Illustrative product preview showing features planned as
+                    JoinAltr develops.
                   </p>
                 </div>
               </div>
@@ -419,7 +389,6 @@ export default function HomePage() {
               <p className="text-xs uppercase tracking-[0.18em] text-gray-600">
                 Reputation
               </p>
-
               <p className="mt-2 font-semibold">
                 Built through contribution
               </p>
@@ -440,59 +409,58 @@ export default function HomePage() {
             </h2>
 
             <p className="mt-7 max-w-xl text-lg leading-8 text-gray-400">
-              They're looking for useful answers, people who understand what
-              they're going through, and support that helps them alter themselves for the better.
+              They&apos;re looking for useful answers, people who understand
+              what they&apos;re going through, and support that helps them move
+              forward.
             </p>
           </div>
 
-          <div className="relative">
-            <div className="grid gap-4">
-              <div className="rounded-[30px] border border-white/10 bg-[#080808] p-6 sm:p-7">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="font-semibold text-gray-300">
-                    Traditional platforms
-                  </p>
+          <div className="grid gap-4">
+            <div className="rounded-[30px] border border-white/10 bg-[#080808] p-6 sm:p-7">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-semibold text-gray-300">
+                  Traditional platforms
+                </p>
 
-                  <span className="rounded-full bg-white/[0.04] px-3 py-1 text-xs text-gray-600">
-                    Attention
-                  </span>
-                </div>
+                <span className="rounded-full bg-white/[0.04] px-3 py-1 text-xs text-gray-600">
+                  Attention
+                </span>
+              </div>
 
-                <div className="mt-6 grid grid-cols-3 gap-3">
-                  {["Followers", "Views", "Likes"].map((item) => (
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                {["Followers", "Views", "Likes"].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-white/[0.025] px-3 py-6 text-center text-sm text-gray-500 sm:text-base"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative overflow-hidden rounded-[30px] border border-emerald-400/25 bg-emerald-400/[0.055] p-6 sm:p-7">
+              <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-emerald-400/10 blur-[70px]" />
+
+              <div className="relative flex items-center justify-between gap-4">
+                <p className="font-semibold">JoinAltr</p>
+
+                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+                  Contribution
+                </span>
+              </div>
+
+              <div className="relative mt-6 grid grid-cols-3 gap-3">
+                {["Helpful replies", "Useful posts", "People supported"].map(
+                  (item) => (
                     <div
                       key={item}
-                      className="rounded-2xl border border-white/10 bg-white/[0.025] px-3 py-6 text-center text-sm text-gray-500 sm:text-base"
+                      className="rounded-2xl border border-emerald-400/20 bg-black/20 px-3 py-6 text-center text-sm font-semibold text-emerald-100"
                     >
                       {item}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative overflow-hidden rounded-[30px] border border-emerald-400/25 bg-emerald-400/[0.055] p-6 sm:p-7">
-                <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-emerald-400/10 blur-[70px]" />
-
-                <div className="relative flex items-center justify-between gap-4">
-                  <p className="font-semibold">JoinAltr</p>
-
-                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
-                    Contribution
-                  </span>
-                </div>
-
-                <div className="relative mt-6 grid grid-cols-3 gap-3">
-                  {["Helpful replies", "Useful posts", "People supported"].map(
-                    (item) => (
-                      <div
-                        key={item}
-                        className="rounded-2xl border border-emerald-400/20 bg-black/20 px-3 py-6 text-center text-sm font-semibold text-emerald-100"
-                      >
-                        {item}
-                      </div>
-                    ),
-                  )}
-                </div>
+                  ),
+                )}
               </div>
             </div>
           </div>
@@ -503,7 +471,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-violet-300">
-              A glimpse of what's coming
+              Illustrative activity
             </p>
 
             <h2 className="mt-6 max-w-4xl text-4xl font-bold leading-[1.02] tracking-[-0.055em] sm:text-6xl">
@@ -512,13 +480,13 @@ export default function HomePage() {
           </div>
 
           <p className="max-w-md leading-7 text-gray-500">
-            Posts centered on honest progress, useful lessons, meaningful
-            questions, and support from people who understand.
+            Honest progress, useful lessons, meaningful questions, and support
+            from people who understand.
           </p>
         </div>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {feedItems.map((item) => (
+          {activityItems.map((item) => (
             <article
               key={item.post}
               className="group relative overflow-hidden rounded-[30px] border border-white/10 bg-white/[0.025] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.04]"
@@ -536,10 +504,9 @@ export default function HomePage() {
                   </div>
 
                   <div>
-                    <p className="font-semibold">{item.name}</p>
-
+                    <p className="font-semibold">{item.member}</p>
                     <p className="mt-1 text-xs text-gray-600">
-                      {item.community} · {item.time}
+                      {item.community}
                     </p>
                   </div>
                 </div>
@@ -563,8 +530,8 @@ export default function HomePage() {
         </div>
 
         <p className="mt-5 text-xs text-gray-600">
-          *Illustrative feed examples. Actual activity will appear as the
-          JoinAltr community grows.
+          Illustrative posts showing how community activity may appear as the
+          platform grows.
         </p>
       </section>
 
@@ -586,7 +553,6 @@ export default function HomePage() {
               className="group inline-flex items-center gap-2 font-semibold text-gray-400 transition hover:text-white"
             >
               Explore all communities
-
               <span className="transition group-hover:translate-x-1">→</span>
             </Link>
           </div>
@@ -603,7 +569,7 @@ export default function HomePage() {
                     <p
                       className={`text-xs font-bold uppercase tracking-[0.2em] ${community.accent}`}
                     >
-                      Community {community.icon}
+                      {community.label}
                     </p>
 
                     <h3 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -614,9 +580,7 @@ export default function HomePage() {
                       {community.description}
                     </p>
 
-                    <p className="mt-7 text-sm text-gray-600">
-                      __* members
-                    </p>
+                    <p className="mt-7 text-sm text-gray-600">__ members</p>
                   </div>
 
                   <span
@@ -630,7 +594,7 @@ export default function HomePage() {
           </div>
 
           <p className="mt-5 text-xs text-gray-600">
-            *Member totals will appear as people join each community.
+            Member totals will appear as people join each community.
           </p>
         </div>
       </section>
@@ -653,7 +617,7 @@ export default function HomePage() {
           {steps.map((step) => (
             <div
               key={step.number}
-              className="group relative bg-[#080808] p-8 transition hover:bg-white/[0.035] lg:min-h-[330px] lg:p-9"
+              className="group relative bg-[#080808] p-8 transition hover:bg-white/[0.035] lg:min-h-[320px] lg:p-9"
             >
               <div className="absolute bottom-0 left-0 h-px w-0 bg-emerald-400 transition-all duration-500 group-hover:w-full" />
 
@@ -731,39 +695,33 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-[1400px] px-6 py-24 sm:px-10 lg:py-32">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-violet-300">
-            What JoinAltr stands for
-          </p>
-
-          <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-bold leading-[1.02] tracking-[-0.055em] sm:text-6xl">
-            A better social platform starts with better incentives.
-          </h2>
-        </div>
-
-        <div className="mt-16 grid gap-px overflow-hidden rounded-[34px] border border-white/10 bg-white/10 md:grid-cols-2">
-          {principles.map((principle) => (
-            <div
-              key={principle.number}
-              className="group bg-[#080808] p-8 transition hover:bg-white/[0.035] sm:p-10"
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-bold text-violet-300">
-                  {principle.number}
-                </p>
-
-                <span className="h-2 w-2 rounded-full bg-white/10 transition group-hover:bg-violet-400" />
-              </div>
-
-              <h3 className="mt-12 text-3xl font-bold tracking-tight">
-                {principle.title}
-              </h3>
-
-              <p className="mt-5 max-w-xl leading-7 text-gray-400">
-                {principle.description}
+        <div className="rounded-[34px] border border-white/10 bg-[#080808] px-7 py-10 sm:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-violet-300">
+                What JoinAltr stands for
               </p>
+
+              <h2 className="mt-5 text-3xl font-bold tracking-[-0.045em] sm:text-4xl">
+                Better incentives create a better social platform.
+              </h2>
             </div>
-          ))}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {principles.map((principle, index) => (
+                <div
+                  key={principle}
+                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.025] px-5 py-4"
+                >
+                  <span className="text-xs font-bold text-violet-300">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  <p className="font-semibold">{principle}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -781,7 +739,7 @@ export default function HomePage() {
             </p>
 
             <h2 className="mx-auto mt-7 max-w-5xl text-5xl font-bold leading-[0.98] tracking-[-0.06em] sm:text-7xl">
-              Start being the person you&apos;ve been trying to become.
+              Become the person you&apos;ve been trying to be.
             </h2>
 
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-8 text-gray-400">
@@ -794,8 +752,7 @@ export default function HomePage() {
                 href="/signup"
                 className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-8 py-4 font-semibold text-black transition duration-300 hover:-translate-y-1 hover:bg-gray-200"
               >
-                Create your profile
-
+                Join the beta
                 <span className="transition group-hover:translate-x-1">→</span>
               </Link>
 
@@ -808,7 +765,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-7 text-sm text-gray-600">
-              Open private beta. Anyone can request access.
+              Open private beta. Anyone can join.
             </p>
           </div>
         </div>
