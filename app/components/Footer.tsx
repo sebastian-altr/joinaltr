@@ -25,7 +25,12 @@ export default function Footer() {
               >
                 Confidence
               </a>
-
+              <a
+                href="/communities/nutrition"
+                className="block hover:text-white"
+              >
+                Nutrition
+              </a>
               <a
                 href="/communities/skincare"
                 className="block hover:text-white"
@@ -33,12 +38,7 @@ export default function Footer() {
                 Skincare
               </a>
 
-              <a
-                href="/communities/nutrition"
-                className="block hover:text-white"
-              >
-                Nutrition
-              </a>
+
             </div>
           </div>
 
