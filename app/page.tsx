@@ -66,17 +66,23 @@ export default function Home() {
             <span className="text-xl font-bold tracking-tight">JoinAltr</span>
           </a>
 
-          <div className="hidden items-center gap-8 text-sm text-gray-400 md:flex">
-            <a href="#how" className="transition hover:text-white">
-              How it works
-            </a>
-            <a href="#communities" className="transition hover:text-white">
-              Communities
-            </a>
-            <a href="#mission" className="transition hover:text-white">
-              Mission
-            </a>
-          </div>
+         <div className="hidden items-center gap-8 text-sm text-gray-400 md:flex">
+  <a href="/" className="transition hover:text-white">
+    Home
+  </a>
+
+  <a href="/about" className="transition hover:text-white">
+    About
+  </a>
+
+  <a href="/communities" className="transition hover:text-white">
+    Communities
+  </a>
+
+  <a href="/contact" className="transition hover:text-white">
+    Contact
+  </a>
+</div>
 
           <a
             href="/waitlist"
@@ -320,7 +326,7 @@ export default function Home() {
           </p>
 
           <a
-            href="mailto:hello@joinaltr.com?subject=JoinAltr Waitlist"
+            href="/waitlist"
             className="mt-10 inline-block rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:bg-gray-200"
           >
             Join the Waitlist
