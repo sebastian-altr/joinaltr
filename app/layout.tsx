@@ -18,12 +18,14 @@ const geistMono = Geist_Mono({
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://joinaltr.com"),
+
   title: "JoinAltr | Find the Community That Moves You Forward",
   description:
     "JoinAltr is a community-driven platform for fitness, confidence, skincare, and nutrition.",
 
   openGraph: {
-    title: "JoinAltr",
+    title: "JoinAltr | Find the Community That Moves You Forward",
     description: "Find the community that moves you forward.",
     url: "https://joinaltr.com",
     siteName: "JoinAltr",
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "JoinAltr",
+    title: "JoinAltr | Find the Community That Moves You Forward",
     description: "Find the community that moves you forward.",
     images: ["/og-image.png"],
   },
