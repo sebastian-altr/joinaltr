@@ -183,7 +183,7 @@ export default function HomePage() {
 
             <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#0a0a0a] p-5 shadow-2xl shadow-black/50 sm:p-7">
               <div className="absolute right-6 top-6 z-10 rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-300">
-                Coming soon
+                Under Development
               </div>
 
               <div className="rounded-[30px] border border-white/10 bg-white/[0.03] p-6 sm:p-8">

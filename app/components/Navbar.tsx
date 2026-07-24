@@ -16,19 +16,26 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050505]/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
         <a
-          href="/"
-          className="flex items-center gap-0.001 text-xl font-bold tracking-tight text-white"
-        >
-          <Image
-            src="/joinaltr-logo.png"
-            alt="JoinAltr Logo"
-            width={66}
-            height={66}
-            priority
-            className="object-contain"
-          />
-          JoinAltr
-        </a>
+  href="/"
+  className="flex items-center gap-0.25 text-xl font-bold tracking-tight text-white"
+>
+  <Image
+    src="/joinaltr-logo.png"
+    alt="JoinAltr Logo"
+    width={66}
+    height={66}
+    priority
+    className="object-contain"
+  />
+
+  <div className="flex items-center gap-3">
+    <span>JoinAltr</span>
+
+    <span className="rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-violet-300">
+      Private Beta
+    </span>
+  </div>
+</a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (
