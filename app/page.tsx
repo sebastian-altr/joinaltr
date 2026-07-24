@@ -348,7 +348,41 @@ export default function Home() {
           </a>
         </div>
       </section>
+<section className="border-t border-white/10 px-6 py-24 sm:px-10">
+  <div className="mx-auto max-w-6xl text-center">
+    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
+      Coming Soon
+    </p>
 
+    <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-6xl">
+      Built for the future of self-improvement.
+    </h2>
+
+    <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400">
+      We're building more than a community. JoinAltr is becoming a platform
+      where people can track progress, stay accountable, and become the best
+      version of themselves.
+    </p>
+
+    <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {[
+        "User Profiles",
+        "Progress Tracking",
+        "Challenges",
+        "Streaks",
+        "Verified Experts",
+        "Mobile App",
+      ].map((item) => (
+        <div
+          key={item}
+          className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+        >
+          <p className="text-xl font-semibold">{item}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
       <footer className="border-t border-white/10 px-6 py-10">
   <div className="mx-auto max-w-6xl text-center">
     <h3 className="text-lg font-semibold text-white">
