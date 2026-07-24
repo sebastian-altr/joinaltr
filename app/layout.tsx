@@ -19,12 +19,13 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://joinaltr.com"),
 
   title: "JoinAltr | Find the Community That Moves You Forward",
-  description:
-    "JoinAltr is a community-driven platform for fitness, confidence, skincare, and nutrition.",
+description:
+  "JoinAltr helps people connect through communities focused on fitness, confidence, skincare, and nutrition.",
 
   openGraph: {
     title: "JoinAltr | Find the Community That Moves You Forward",
-    description: "Find the community that moves you forward.",
+    description:
+  "JoinAltr helps people connect through communities focused on fitness, confidence, skincare, and nutrition.",
     url: "https://joinaltr.com",
     siteName: "JoinAltr",
     images: [
@@ -41,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "JoinAltr | Find the Community That Moves You Forward",
-    description: "Find the community that moves you forward.",
+    description:
+  "JoinAltr helps people connect through communities focused on fitness, confidence, skincare, and nutrition.",
     images: ["/og-image.png"],
   },
 };
