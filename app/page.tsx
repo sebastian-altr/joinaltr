@@ -32,22 +32,22 @@ const communities = [
   {
     initials: "BM",
     title: "Build Muscle",
-    members: "0 members",
+    members: "_ members",
   },
   {
     initials: "CS",
     title: "Clear Skin",
-    members: "0 members",
+    members: "_ members",
   },
   {
     initials: "HH",
     title: "Healthy Habits",
-    members: "0 members",
+    members: "_ members",
   },
   {
     initials: "BS",
     title: "Better Style",
-    members: "0 members",
+    members: "_ members",
   },
 ];
 
@@ -192,17 +192,17 @@ export default function Home() {
 
                 <div className="mt-4 grid grid-cols-3 gap-3 text-center">
                   <div>
-                    <p className="text-2xl font-bold">8.4K</p>
+                    <p className="text-2xl font-bold">_</p>
                     <p className="mt-1 text-xs text-gray-400">Check-ins</p>
                   </div>
 
                   <div>
-                    <p className="text-2xl font-bold">2.1K</p>
+                    <p className="text-2xl font-bold">_</p>
                     <p className="mt-1 text-xs text-gray-400">Milestones</p>
                   </div>
 
                   <div>
-                    <p className="text-2xl font-bold">642</p>
+                    <p className="text-2xl font-bold">_</p>
                     <p className="mt-1 text-xs text-gray-400">Challenges</p>
                   </div>
                 </div>
