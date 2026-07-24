@@ -79,7 +79,7 @@ export default function Home() {
           </div>
 
           <a
-            href="#waitlist"
+            href="/waitlist"
             className="rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-black"
           >
             Join the Waitlist
@@ -106,7 +106,7 @@ export default function Home() {
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
-                href="#waitlist"
+                href="/waitlist"
                 className="rounded-full bg-white px-8 py-4 text-center font-semibold text-black transition hover:bg-gray-200"
               >
                 Join the Waitlist
