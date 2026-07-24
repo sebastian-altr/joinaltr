@@ -383,7 +383,7 @@ export default function Home() {
     </div>
   </div>
 </section>
-      <footer className="border-t border-white/10 px-6 py-10">
+     <footer className="border-t border-white/10 px-6 py-10">
   <div className="mx-auto max-w-6xl text-center">
     <h3 className="text-lg font-semibold text-white">
       JoinAltr
@@ -393,9 +393,18 @@ export default function Home() {
       The internet&apos;s home for healthy self-improvement.
     </p>
 
+    <div className="mt-6 flex justify-center gap-6 text-sm text-gray-400">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/communities">Communities</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+
     <a
       href="mailto:hello@joinaltr.com"
-      className="mt-4 block text-gray-400 transition hover:text-white"
+      className="mt-6 block text-gray-400 transition hover:text-white"
     >
       hello@joinaltr.com
     </a>
