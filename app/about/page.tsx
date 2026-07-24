@@ -27,7 +27,7 @@ export default function AboutPage() {
             <p>
               Throughout my life, I've been fascinated by performance,
               discipline, and personal growth. From competing as a collegiate
-              athlete at Cornell University to working in consulting after
+              athlete to working in New York City after
               graduation, I saw firsthand how much confidence, health, and
               community shape a person's life.
             </p>

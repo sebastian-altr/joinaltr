@@ -1,178 +1,268 @@
-import Image from "next/image";
-const pillars = [
-  "Fitness",
-  "Skincare",
-  "Nutrition",
-  "Sleep",
-  "Style",
-  "Confidence",
-];
-
-const features = [
-  {
-    number: "01",
-    title: "Find your people",
-    description:
-      "Join communities built around the goals that matter to you—from fitness and skincare to style, sleep, and confidence.",
-  },
-  {
-    number: "02",
-    title: "Track real progress",
-    description:
-      "Document habits, routines, milestones, photos, and transformations without chasing likes or fake perfection.",
-  },
-  {
-    number: "03",
-    title: "Improve together",
-    description:
-      "Get practical advice, join challenges, and stay accountable alongside people who genuinely want to see you succeed.",
-  },
-];
+import Link from "next/link";
 
 const communities = [
   {
-    initials: "BM",
-    title: "Build Muscle",
-    members: "_ members",
+    name: "Fitness",
+    description:
+      "Share workouts, build better routines, and stay accountable with people working toward similar goals.",
+    accent: "text-emerald-300",
+    background: "from-emerald-400/20 to-emerald-400/[0.02]",
+    border: "border-emerald-400/20",
   },
   {
-    initials: "CS",
-    title: "Clear Skin",
-    members: "_ members",
+    name: "Confidence",
+    description:
+      "Practice taking action, speaking up, and becoming more comfortable being seen.",
+    accent: "text-violet-300",
+    background: "from-violet-400/20 to-violet-400/[0.02]",
+    border: "border-violet-400/20",
   },
   {
-    initials: "HH",
-    title: "Healthy Habits",
-    members: "_ members",
+    name: "Nutrition",
+    description:
+      "Build healthier eating habits through practical advice, shared experiences, and support.",
+    accent: "text-orange-300",
+    background: "from-orange-300/20 to-orange-300/[0.02]",
+    border: "border-orange-300/20",
   },
   {
-    initials: "BS",
-    title: "Better Style",
-    members: "_ members",
+    name: "Skincare",
+    description:
+      "Discuss routines, products, setbacks, and progress with people who understand the process.",
+    accent: "text-sky-300",
+    background: "from-sky-300/20 to-sky-300/[0.02]",
+    border: "border-sky-300/20",
   },
 ];
 
-export default function Home() {
+const journeySteps = [
+  {
+    number: "01",
+    title: "Create your profile",
+    description:
+      "Share what you are working on, what you have learned, and where you want to improve.",
+  },
+  {
+    number: "02",
+    title: "Join relevant communities",
+    description:
+      "Find people dealing with similar goals, questions, setbacks, and experiences.",
+  },
+  {
+    number: "03",
+    title: "Post and participate",
+    description:
+      "Ask questions, share progress, offer useful advice, and take part in real discussions.",
+  },
+  {
+    number: "04",
+    title: "Build a meaningful reputation",
+    description:
+      "Earn appreciation when other members find your posts, replies, and encouragement helpful.",
+  },
+];
+
+const profileSignals = [
+  {
+    label: "Helpful replies",
+    value: "__",
+  },
+  {
+    label: "Communities joined",
+    value: "__",
+  },
+  {
+    label: "Days active",
+    value: "__",
+  },
+];
+
+const tiers = [
+  {
+    name: "New Member",
+    range: "0–24 👍",
+    border: "border-white/10",
+    background: "bg-white/[0.03]",
+    badge: "border-white/10 bg-white/[0.06] text-gray-300",
+    glow: "",
+  },
+  {
+    name: "Bronze",
+    range: "25–99 👍",
+    border: "border-orange-700/30",
+    background: "bg-orange-900/10",
+    badge: "border-orange-700/30 bg-orange-700/15 text-orange-300",
+    glow: "shadow-orange-950/20",
+  },
+  {
+    name: "Silver",
+    range: "100–249 👍",
+    border: "border-slate-300/20",
+    background: "bg-slate-300/[0.06]",
+    badge: "border-slate-300/20 bg-slate-300/10 text-slate-200",
+    glow: "shadow-slate-950/20",
+  },
+  {
+    name: "Gold",
+    range: "250–499 👍",
+    border: "border-yellow-400/25",
+    background: "bg-yellow-400/[0.07]",
+    badge: "border-yellow-400/25 bg-yellow-400/10 text-yellow-200",
+    glow: "shadow-yellow-950/20",
+  },
+  {
+    name: "Platinum",
+    range: "500–999 👍",
+    border: "border-cyan-300/25",
+    background: "bg-cyan-300/[0.07]",
+    badge: "border-cyan-300/25 bg-cyan-300/10 text-cyan-100",
+    glow: "shadow-cyan-950/20",
+  },
+  {
+    name: "Legend",
+    range: "1000+ 👍",
+    border: "border-violet-400/30",
+    background:
+      "bg-gradient-to-br from-violet-400/10 via-fuchsia-400/[0.06] to-amber-300/[0.06]",
+    badge:
+      "border-violet-400/30 bg-violet-400/10 text-violet-200",
+    glow: "shadow-violet-950/30",
+  },
+];
+
+export default function HomePage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
-      <section className="relative min-h-screen border-b border-white/10">
-      <div className="relative z-20 border-b border-emerald-400/20 bg-emerald-400/10 py-3 text-center">
-  <p className="text-sm font-medium text-emerald-300">
-    JoinAltr is currently in private beta. Join the waitlist to get early
-    access.
-  </p>
-</div>
-        <div className="absolute left-1/2 top-[-250px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[180px]" />
-        <div className="absolute right-[-220px] top-[260px] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[180px]" />
+      <section className="relative">
+        <div className="absolute left-1/2 top-0 h-[650px] w-[950px] -translate-x-1/2 rounded-full bg-emerald-400/[0.07] blur-[150px]" />
 
+        <div className="absolute -right-52 top-80 h-[500px] w-[500px] rounded-full bg-violet-400/[0.08] blur-[140px]" />
 
-        <div className="relative z-10 mx-auto grid min-h-[calc(100vh-96px)] max-w-7xl items-center gap-16 px-6 py-16 sm:px-10 lg:grid-cols-2">
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-6 pb-24 pt-20 sm:px-10 lg:grid-cols-[1fr_0.88fr] lg:items-center lg:pb-32 lg:pt-28">
           <div>
-            <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-300">
+            <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-gray-300">
               <span className="h-2 w-2 rounded-full bg-emerald-400" />
-              The home of healthy self-improvement
+              A social platform built around becoming better
             </div>
 
-            <h1 className="max-w-4xl text-6xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-8xl">
-              Become
-              <br />
-              More.
+            <h1 className="mt-8 max-w-4xl text-5xl font-bold leading-[0.97] tracking-[-0.06em] sm:text-6xl lg:text-[80px]">
+              Become the person you&apos;ve been trying to become.
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-300 sm:text-xl">
-              Join a community of people becoming healthier, stronger, and more
-              confident through real progress, accountability, and support.
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl">
+              Join communities where people share honest experiences, helpful
+              advice, real progress, and support that makes it easier to move
+              forward.
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="/waitlist"
-                className="rounded-full bg-white px-8 py-4 text-center font-semibold text-black transition hover:bg-gray-200"
+              <Link
+                href="/signup"
+                className="rounded-full bg-white px-8 py-4 text-center font-semibold text-black transition hover:-translate-y-0.5 hover:bg-gray-200"
               >
-                Join the Waitlist
-              </a>
+                Create your profile
+              </Link>
 
-              <a
-                href="#how"
-                className="rounded-full border border-white/10 px-8 py-4 text-center font-semibold transition hover:border-white/40"
+              <Link
+                href="/communities"
+                className="rounded-full border border-white/10 px-8 py-4 text-center font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.04]"
               >
-                See How It Works
-              </a>
+                Explore communities
+              </Link>
             </div>
 
-            <div className="mt-12 flex flex-wrap gap-3">
-              {pillars.map((pillar) => (
-                <span
-                  key={pillar}
-                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300"
-                >
-                  {pillar}
-                </span>
-              ))}
+            <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 text-sm text-gray-500">
+              <span>No follower counts</span>
+              <span>No popularity contests</span>
+              <span>Helpful contributions matter</span>
             </div>
           </div>
 
-          <div className="relative">
-            <div className="rounded-[32px] border border-white/10 bg-white/[0.04] p-6 shadow-2xl backdrop-blur sm:p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-500">
-                    Community activity
-                  </p>
-                  <h2 className="mt-2 text-2xl font-semibold">
-                    Improve alongside others.
-                  </h2>
-                </div>
+          <div className="relative lg:pl-6">
+            <div className="absolute -inset-12 rounded-full bg-gradient-to-br from-emerald-400/10 to-violet-400/10 blur-3xl" />
 
-                <div className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-                  Live
-                </div>
+            <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#0a0a0a] p-5 shadow-2xl shadow-black/50 sm:p-7">
+              <div className="absolute right-6 top-6 z-10 rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-violet-300">
+                Coming soon
               </div>
 
-              <div className="mt-8 space-y-4">
-                {communities.map((community) => (
-                  <div
-                    key={community.title}
-                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 p-4 transition hover:border-white/20 hover:bg-white/[0.04]"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm font-semibold">
-                        {community.initials}
-                      </div>
+              <div className="rounded-[30px] border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+                <div className="flex items-center gap-5">
+                  <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-emerald-400/20 to-violet-400/20 text-2xl font-bold">
+                    JA
+                  </div>
 
-                      <div>
-                        <h3 className="font-semibold">{community.title}</h3>
-                        <p className="mt-1 text-sm text-gray-500">
-                          {community.members}
-                        </p>
-                      </div>
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3 pr-20">
+                      <h2 className="text-2xl font-bold">
+                        Community Member
+                      </h2>
+
+                      <span className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-gray-300">
+                        New Member
+                      </span>
                     </div>
 
-                    <span className="text-sm text-gray-500">View</span>
-                  </div>
-                ))}
-              </div>
+                    <p className="mt-1 text-sm text-gray-500">
+                      @yourusername
+                    </p>
 
-              <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-emerald-300">
-                  This week
+                    <p className="mt-3 font-semibold text-gray-300">__ 👍</p>
+                  </div>
+                </div>
+
+                <p className="mt-7 leading-7 text-gray-300">
+                  Working on building healthier habits, becoming more
+                  confident, and sharing what I learn along the way.
                 </p>
 
-                <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-                  <div>
-                    <p className="text-2xl font-bold">_</p>
-                    <p className="mt-1 text-xs text-gray-400">Check-ins</p>
-                  </div>
+                <div className="mt-7 grid grid-cols-3 gap-3">
+                  {profileSignals.map((signal) => (
+                    <div
+                      key={signal.label}
+                      className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                    >
+                      <p className="text-2xl font-bold">{signal.value}</p>
 
-                  <div>
-                    <p className="text-2xl font-bold">_</p>
-                    <p className="mt-1 text-xs text-gray-400">Milestones</p>
-                  </div>
+                      <p className="mt-1 text-xs leading-5 text-gray-500">
+                        {signal.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
 
-                  <div>
-                    <p className="text-2xl font-bold">_</p>
-                    <p className="mt-1 text-xs text-gray-400">Challenges</p>
+                <div className="mt-7">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
+                    Communities
+                  </p>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {["Fitness", "Confidence", "Nutrition"].map(
+                      (community) => (
+                        <span
+                          key={community}
+                          className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-gray-300"
+                        >
+                          {community}
+                        </span>
+                      ),
+                    )}
                   </div>
+                </div>
+
+                <div className="mt-7 rounded-[22px] border border-emerald-400/20 bg-emerald-400/[0.06] p-5">
+                  <p className="text-sm font-semibold text-emerald-300">
+                    Recent contribution
+                  </p>
+
+                  <p className="mt-3 leading-7 text-gray-300">
+                    Shared a practical answer that helped another member take
+                    their next step.
+                  </p>
+
+                  <p className="mt-4 text-sm text-gray-500">
+                    __ members found this helpful
+                  </p>
                 </div>
               </div>
             </div>
@@ -180,169 +270,238 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="how"
-        className="border-b border-white/10 px-6 py-24 sm:px-10"
-      >
-        <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-            How it works
-          </p>
+      <section className="border-y border-white/10 bg-white/[0.02]">
+        <div className="mx-auto grid max-w-7xl gap-14 px-6 py-24 sm:px-10 lg:grid-cols-2 lg:items-center lg:py-32">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-400">
+              A different kind of social platform
+            </p>
 
-          <div className="mt-5 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-            <h2 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
-              Real progress starts with the right people around you.
+            <h2 className="mt-6 max-w-2xl text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+              People aren&apos;t looking for more followers.
             </h2>
 
-            <p className="max-w-md text-lg leading-8 text-gray-400">
-              JoinAltr gives you the structure, community, and accountability
-              needed to keep improving long after motivation fades.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-gray-400">
+              They are looking for useful answers, people who understand what
+              they are going through, and support that helps them take action.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-6 lg:grid-cols-3">
-            {features.map((feature) => (
-              <article
-                key={feature.number}
-                className="rounded-3xl border border-white/10 bg-white/[0.03] p-7"
-              >
+          <div className="grid gap-4">
+            <div className="rounded-[28px] border border-white/10 bg-[#080808] p-6">
+              <div className="flex items-center justify-between gap-4">
+                <p className="text-gray-400">Traditional platforms</p>
+
+                <p className="text-sm text-gray-600">Measure attention</p>
+              </div>
+
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                {["Followers", "Views", "Likes"].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-3 py-5 text-center text-sm text-gray-400 sm:text-base"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[28px] border border-emerald-400/20 bg-emerald-400/[0.06] p-6">
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-semibold text-white">JoinAltr</p>
+
+                <p className="text-sm text-emerald-300">
+                  Measures contribution
+                </p>
+              </div>
+
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                {["Helpful replies", "People supported", "Useful posts"].map(
+                  (item) => (
+                    <div
+                      key={item}
+                      className="rounded-2xl border border-emerald-400/20 bg-black/20 px-3 py-5 text-center text-sm font-semibold text-emerald-100"
+                    >
+                      {item}
+                    </div>
+                  ),
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 lg:py-32">
+        <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-violet-300">
+              Find people who understand
+            </p>
+
+            <h2 className="mt-5 max-w-3xl text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+              Communities for the person you&apos;ve been trying to become.
+            </h2>
+          </div>
+
+          <Link
+            href="/communities"
+            className="font-semibold text-gray-400 transition hover:text-white"
+          >
+            Explore all communities →
+          </Link>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {communities.map((community) => (
+            <Link
+              key={community.name}
+              href={`/communities/${community.name.toLowerCase()}`}
+              className={`group rounded-[32px] border bg-gradient-to-br p-7 transition duration-300 hover:-translate-y-1 sm:p-9 ${community.border} ${community.background}`}
+            >
+              <div className="flex items-start justify-between gap-6">
+                <div>
+                  <p
+                    className={`text-sm font-semibold uppercase tracking-[0.18em] ${community.accent}`}
+                  >
+                    __ members
+                  </p>
+
+                  <h3 className="mt-5 text-3xl font-bold tracking-tight">
+                    {community.name}
+                  </h3>
+
+                  <p className="mt-4 max-w-lg leading-7 text-gray-400">
+                    {community.description}
+                  </p>
+                </div>
+
+                <span
+                  className={`text-2xl transition group-hover:translate-x-1 ${community.accent}`}
+                >
+                  →
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="how-it-works"
+        className="border-y border-white/10 bg-white/[0.02]"
+      >
+        <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 lg:py-32">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-400">
+              How it works
+            </p>
+
+            <h2 className="mt-5 text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+              Becoming better is easier when you stop doing it alone.
+            </h2>
+          </div>
+
+          <div className="mt-16 grid gap-px overflow-hidden rounded-[32px] border border-white/10 bg-white/10 lg:grid-cols-4">
+            {journeySteps.map((step) => (
+              <div key={step.number} className="bg-[#080808] p-8 lg:p-9">
                 <p className="text-sm font-semibold text-emerald-400">
-                  {feature.number}
+                  {step.number}
                 </p>
 
-                <h3 className="mt-8 text-2xl font-semibold">
-                  {feature.title}
-                </h3>
+                <h3 className="mt-10 text-2xl font-bold">{step.title}</h3>
 
                 <p className="mt-4 leading-7 text-gray-400">
-                  {feature.description}
+                  {step.description}
                 </p>
-              </article>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        id="communities"
-        className="border-b border-white/10 px-6 py-24 sm:px-10"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-                Built around your goals
-              </p>
+      <section className="mx-auto max-w-7xl px-6 py-24 sm:px-10 lg:py-32">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-yellow-200">
+            Reputation with meaning
+          </p>
 
-              <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-6xl">
-                One platform. Every part of becoming better.
-              </h2>
+          <h2 className="mt-5 text-4xl font-bold tracking-[-0.05em] sm:text-5xl lg:text-6xl">
+            Earn recognition by helping people move forward.
+          </h2>
 
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-400">
-                Whether you are building muscle, improving your skin, fixing
-                your sleep, upgrading your style, or rebuilding confidence,
-                you will find people pursuing the same goal.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-400">
+            Your tier is based on the appreciation you receive for useful
+            posts, thoughtful replies, practical advice, and genuine support.
+          </p>
+        </div>
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tiers.map((tier, index) => (
+            <div
+              key={tier.name}
+              className={`rounded-[28px] border p-6 shadow-2xl ${tier.border} ${tier.background} ${tier.glow}`}
+            >
+              <div className="flex items-center justify-between gap-5">
+                <div
+                  className={`flex h-11 w-11 items-center justify-center rounded-full border text-sm font-bold ${tier.badge}`}
+                >
+                  {index + 1}
+                </div>
+
+                <p className="text-sm text-gray-500">{tier.range}</p>
+              </div>
+
+              <h3 className="mt-8 text-2xl font-bold">{tier.name}</h3>
+
+              <p className="mt-3 leading-7 text-gray-400">
+                Earned through positive contributions that other members find
+                helpful.
               </p>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <div className="grid grid-cols-2 gap-4">
-              {pillars.map((pillar, index) => (
-                <div
-                  key={pillar}
-                  className="rounded-2xl border border-white/10 bg-white/[0.03] p-6"
-                >
-                  <p className="text-sm text-gray-500">
-                    0{index + 1}
-                  </p>
-                  <p className="mt-8 text-xl font-semibold">{pillar}</p>
-                </div>
-              ))}
+      <section className="px-6 pb-24 sm:px-10 lg:pb-32">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[40px] border border-white/10 bg-white/[0.04] px-7 py-16 text-center sm:px-12 lg:py-24">
+          <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-emerald-400/10 blur-[100px]" />
+
+          <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-violet-400/10 blur-[100px]" />
+
+          <div className="relative">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-emerald-400">
+              Progress over popularity
+            </p>
+
+            <h2 className="mx-auto mt-6 max-w-4xl text-5xl font-bold leading-[1.02] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
+              Start becoming the person you&apos;ve been trying to become.
+            </h2>
+
+            <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-gray-400">
+              Find people who understand your goals, share what you learn, and
+              build a reputation based on how you help.
+            </p>
+
+            <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+              <Link
+                href="/signup"
+                className="rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:-translate-y-0.5 hover:bg-gray-200"
+              >
+                Create your profile
+              </Link>
+
+              <Link
+                href="/communities"
+                className="rounded-full border border-white/10 px-8 py-4 font-semibold transition hover:-translate-y-0.5 hover:border-white/30 hover:bg-white/[0.04]"
+              >
+                Explore communities
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      <section
-        id="mission"
-        className="border-b border-white/10 px-6 py-24 sm:px-10"
-      >
-        <div className="mx-auto max-w-7xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-            Our mission
-          </p>
-
-          <blockquote className="mt-8 max-w-5xl text-4xl font-semibold leading-tight tracking-tight sm:text-6xl">
-            Help people become healthier, stronger, and more confident—one real
-            conversation at a time.
-          </blockquote>
-
-          <p className="mt-8 max-w-3xl text-lg leading-8 text-gray-400">
-            No follower-count obsession. No fake perfection. No toxic
-            comparison. Just real people helping real people improve their
-            lives.
-          </p>
-        </div>
-      </section>
-
-      <section id="waitlist" className="px-6 py-24 sm:px-10">
-        <div className="mx-auto max-w-5xl rounded-[36px] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.03] px-8 py-16 text-center sm:px-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-            Join early
-          </p>
-
-          <h2 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
-            Be part of something built around real growth.
-          </h2>
-
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-400">
-            Join the early community and help shape the internet&apos;s home for
-            healthy self-improvement.
-          </p>
-
-          <a
-            href="/waitlist"
-            className="mt-10 inline-block rounded-full bg-white px-8 py-4 font-semibold text-black transition hover:bg-gray-200"
-          >
-            Join the Waitlist
-          </a>
-        </div>
-      </section>
-<section className="border-t border-white/10 px-6 py-24 sm:px-10">
-  <div className="mx-auto max-w-6xl text-center">
-    <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-400">
-      Coming Soon
-    </p>
-
-    <h2 className="mt-5 text-4xl font-bold tracking-tight sm:text-6xl">
-      Built for the future of self-improvement.
-    </h2>
-
-    <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-400">
-      We're building more than a community. JoinAltr is becoming a platform
-      where people can track progress, stay accountable, and become the best
-      version of themselves.
-    </p>
-
-    <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {[
-        "User Profiles",
-        "Progress Tracking",
-        "Challenges",
-        "Streaks",
-        "Verified Experts",
-        "Mobile App",
-      ].map((item) => (
-        <div
-          key={item}
-          className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
-        >
-          <p className="text-xl font-semibold">{item}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
     </main>
   );
 }
