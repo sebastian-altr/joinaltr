@@ -65,47 +65,6 @@ export default function Home() {
         <div className="absolute left-1/2 top-[-250px] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[180px]" />
         <div className="absolute right-[-220px] top-[260px] h-[500px] w-[500px] rounded-full bg-blue-500/10 blur-[180px]" />
 
-        <nav className="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-6 py-7 sm:px-10">
-          <a href="/" className="flex items-center gap-0.25">
-  <Image
-    src="/joinaltr-logo.png"
-    alt="JoinAltr Logo"
-    width={64}
-    height={64}
-    priority
-    className="object-contain"
-  />
-
-  <span className="text-xl font-semibold tracking-tight">
-    JoinAltr
-  </span>
-</a>
-
-         <div className="hidden items-center gap-8 text-sm text-gray-400 md:flex">
-  <a href="/" className="transition hover:text-white">
-    Home
-  </a>
-
-  <a href="/about" className="transition hover:text-white">
-    About
-  </a>
-
-  <a href="/communities" className="transition hover:text-white">
-    Communities
-  </a>
-
-  <a href="/contact" className="transition hover:text-white">
-    Contact
-  </a>
-</div>
-
-          <a
-            href="/waitlist"
-            className="rounded-full border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold transition hover:bg-white hover:text-black"
-          >
-            Join the Waitlist
-          </a>
-        </nav>
 
         <div className="relative z-10 mx-auto grid min-h-[calc(100vh-96px)] max-w-7xl items-center gap-16 px-6 py-16 sm:px-10 lg:grid-cols-2">
           <div>
