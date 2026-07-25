@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import LogoutButton from "../components/LogoutButton";
 import { createClient } from "../../lib/supabase/client";
 
 type Profile = {
@@ -519,12 +520,19 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <Link
-              href="/profile/edit"
-              className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/[0.07]"
-            >
-              Edit Profile
-            </Link>
+            <div className="flex items-center gap-3">
+ <div className="flex items-center gap-3">
+  <Link
+    href="/profile/edit"
+    className="inline-flex w-fit rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-semibold"
+  >
+    Edit Profile
+  </Link>
+
+  <LogoutButton />
+</div>
+
+</div>
           </div>
         </div>
       </section>
