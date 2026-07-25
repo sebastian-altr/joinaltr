@@ -233,7 +233,7 @@ export default function HomePage() {
             </div>
 
             <h1 className="mt-9 max-w-5xl text-5xl font-bold leading-[0.94] tracking-[-0.065em] sm:text-7xl lg:text-[88px]">
-              Become the person you&apos;ve been trying to become.
+              Find out what actually worked for people like you.
             </h1>
 
             <p className="mt-8 max-w-xl text-lg leading-8 text-gray-400 sm:text-xl">
