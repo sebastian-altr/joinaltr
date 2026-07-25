@@ -4,10 +4,13 @@ import { useState } from "react";
 import Image from "next/image";
 
 const links = [
+  { label: "Feed", href: "/feed" },
   { label: "Communities", href: "/communities" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Profile", href: "/profile" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "About", href: "/about" },
+  { label: "Waitlist", href: "/waitlist" },
+  { label: "Contact", href: "/contact" },
+  { label: "Profile", href: "/profile" },
 ];
 
 export default function Navbar() {
@@ -28,7 +31,8 @@ export default function Navbar() {
             width={72}
             height={72}
             priority
-className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:w-[72px]"          />
+            className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:w-[72px]"
+          />
 
           <div className="flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1.5">
             <span className="relative flex h-2 w-2 shrink-0">
@@ -43,12 +47,12 @@ className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:
         </a>
 
         {/* Desktop navigation */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-gray-400 transition hover:text-white"
+              className="whitespace-nowrap text-sm font-medium text-gray-400 transition hover:text-white"
             >
               {link.label}
             </a>
@@ -56,7 +60,7 @@ className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:
 
           <a
             href="/signup"
-            className="rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-gray-200"
+            className="ml-2 whitespace-nowrap rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-gray-200"
           >
             Join Now
           </a>
@@ -68,7 +72,7 @@ className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:
           aria-label="Toggle navigation"
           aria-expanded={isOpen}
           onClick={() => setIsOpen((current) => !current)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-white/30 md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white transition hover:border-white/30 lg:hidden"
         >
           <span className="text-xl">{isOpen ? "×" : "☰"}</span>
         </button>
@@ -76,8 +80,8 @@ className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:
 
       {/* Mobile navigation */}
       {isOpen && (
-        <nav className="border-t border-white/10 px-6 py-5 md:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-4">
+        <nav className="border-t border-white/10 px-6 py-5 lg:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col gap-2">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -92,7 +96,7 @@ className="h-16 w-16 shrink-0 object-contain brightness-0 invert sm:h-[72px] sm:
             <a
               href="/signup"
               onClick={() => setIsOpen(false)}
-              className="mt-2 rounded-full bg-white px-6 py-4 text-center font-semibold text-black transition hover:bg-gray-200"
+              className="mt-3 rounded-full bg-white px-6 py-4 text-center font-semibold text-black transition hover:bg-gray-200"
             >
               Join Now
             </a>
