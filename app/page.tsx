@@ -750,7 +750,16 @@ export default function HomePage() {
                       {community.description}
                     </p>
 
-                    <p className="mt-7 text-sm text-gray-600">__ members</p>
+                    <div className="mt-7 flex flex-col gap-1 text-sm text-gray-600">
+  <span>
+    <p className="mt-7 text-sm text-gray-600">
+  __ Posts
+</p>
+
+  </span>
+
+  <span>__ Answers That Worked</span>
+</div>
                   </div>
 
                   <span

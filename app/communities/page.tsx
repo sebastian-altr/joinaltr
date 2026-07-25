@@ -1,5 +1,15 @@
-import Link from "next/link";
+"use client";
 
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { createClient } from "../../lib/supabase/client";
+type CommunityCounts = Record<
+  string,
+  {
+    questions: number;
+    answersWorked: number;
+  }
+>;
 const featuredQuestions = [
   {
     community: "Fitness",
@@ -56,6 +66,7 @@ const featuredQuestions = [
 const communities = [
   {
     name: "Fitness",
+    slug: "fitness",
     href: "/communities/fitness",
     description:
       "Training, consistency, strength, recovery, and building routines that last.",
@@ -67,6 +78,7 @@ const communities = [
   },
   {
     name: "Nutrition",
+    slug: "nutrition",
     href: "/communities/nutrition",
     description:
       "Practical eating habits, meal planning, energy, and sustainable nutrition.",
@@ -74,10 +86,11 @@ const communities = [
     gradient: "from-emerald-500/20 to-teal-500/5",
     iconStyle:
       "border-emerald-400/20 bg-emerald-400/10 text-emerald-300",
-    stats: ["__ questions", "__ answers worked"],
+   
   },
   {
     name: "Confidence",
+    slug: "confidence",
     href: "/communities/confidence",
     description:
       "Social confidence, self-belief, communication, and overcoming fear.",
@@ -88,6 +101,7 @@ const communities = [
   },
   {
     name: "Skincare",
+    slug: "skincare",
     href: "/communities/skincare",
     description:
       "Simple routines, acne, products, consistency, and experiences over hype.",
@@ -101,6 +115,98 @@ const communities = [
 const filters = ["Recent", "Unresolved", "Resolved", "Most helpful"];
 
 export default function CommunitiesPage() {
+  const supabase = useMemo(() => createClient(), []);
+
+  const [communityCounts, setCommunityCounts] =
+    useState<CommunityCounts>({});
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadCommunityCounts() {
+      const { data: communityRows, error: communitiesError } =
+        await supabase
+          .from("communities")
+          .select("id, slug");
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (communitiesError) {
+        console.error(
+          "Could not load communities:",
+          communitiesError,
+        );
+        return;
+      }
+
+      const { data: postRows, error: postsError } = await supabase
+        .from("posts")
+        .select("community_id, status, worked_reply_id");
+
+      if (!isMounted) {
+        return;
+      }
+
+      if (postsError) {
+        console.error(
+          "Could not load community post counts:",
+          postsError,
+        );
+        return;
+      }
+
+      const slugByCommunityId = new Map(
+        (communityRows ?? []).map((community) => [
+          community.id,
+          community.slug,
+        ]),
+      );
+
+      const nextCounts: CommunityCounts = {};
+
+      for (const community of communityRows ?? []) {
+        nextCounts[community.slug] = {
+          questions: 0,
+          answersWorked: 0,
+        };
+      }
+
+      for (const post of postRows ?? []) {
+        const slug = slugByCommunityId.get(post.community_id);
+
+        if (!slug) {
+          continue;
+        }
+
+        if (!nextCounts[slug]) {
+          nextCounts[slug] = {
+            questions: 0,
+            answersWorked: 0,
+          };
+        }
+
+        nextCounts[slug].questions += 1;
+
+        if (
+          post.status === "resolved" ||
+          Boolean(post.worked_reply_id)
+        ) {
+          nextCounts[slug].answersWorked += 1;
+        }
+      }
+
+      setCommunityCounts(nextCounts);
+    }
+
+    void loadCommunityCounts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [supabase]);
+
   return (
     <main className="min-h-screen overflow-hidden bg-[#050505] text-white">
       {/* Hero */}
@@ -191,15 +297,20 @@ export default function CommunitiesPage() {
                   </p>
 
                   <div className="mt-8 flex flex-wrap gap-2">
-                    {community.stats.map((stat) => (
-                      <span
-                        key={stat}
-                        className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-medium text-gray-400"
-                      >
-                        {stat}
-                      </span>
-                    ))}
-                  </div>
+  <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-medium text-gray-400">
+    {communityCounts[community.slug]?.questions ?? 0}{" "}
+    {(communityCounts[community.slug]?.questions ?? 0) === 1
+      ? "question"
+      : "questions"}
+  </span>
+
+  <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs font-medium text-gray-400">
+    {communityCounts[community.slug]?.answersWorked ?? 0}{" "}
+    {(communityCounts[community.slug]?.answersWorked ?? 0) === 1
+      ? "answer worked"
+      : "answers worked"}
+  </span>
+</div>
                 </div>
               </Link>
             ))}

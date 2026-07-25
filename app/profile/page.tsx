@@ -27,36 +27,15 @@ type Profile = {
   resolutions_count?: number | null;
 };
 
-type ActivityItem = {
-  type: "answer" | "question" | "community";
+type UserPost = {
+  id: string;
   title: string;
-  detail: string;
-  community: string;
+  body: string;
+  status: "open" | "resolved";
+  created_at: string;
+  community_name: string;
+  community_slug: string;
 };
-
-const previewActivity: ActivityItem[] = [
-  {
-    type: "answer",
-    title: "Your answers that work will appear here.",
-    detail:
-      "When someone marks your advice as what helped, it will become part of your reputation.",
-    community: "Answers",
-  },
-  {
-    type: "question",
-    title: "Your questions and outcomes will appear here.",
-    detail:
-      "Return after trying advice to record whether anything genuinely helped.",
-    community: "Questions",
-  },
-  {
-    type: "community",
-    title: "Your community contributions will appear here.",
-    detail:
-      "Join conversations centered on the goals and problems you understand.",
-    community: "Communities",
-  },
-];
 
 const tierStyles: Record<
   string,
@@ -190,9 +169,60 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
 
+const [userPosts, setUserPosts] = useState<UserPost[]>([]);
+const [workedAnswerCount, setWorkedAnswerCount] = useState(0);
+
   useEffect(() => {
   let isMounted = true;
+async function loadWorkedAnswerCount(userId: string) {
+  const { data: userReplies, error: repliesError } = await supabase
+    .from("replies")
+    .select("id")
+    .eq("author_id", userId);
 
+  if (!isMounted) {
+    return;
+  }
+
+  if (repliesError) {
+    console.error(
+      "Could not load the user's replies:",
+      repliesError,
+    );
+    setWorkedAnswerCount(0);
+    return;
+  }
+
+  const replyIds = (userReplies ?? []).map((reply) => reply.id);
+
+  if (replyIds.length === 0) {
+    setWorkedAnswerCount(0);
+    return;
+  }
+
+  const { count, error: workedAnswersError } = await supabase
+    .from("posts")
+    .select("id", {
+      count: "exact",
+      head: true,
+    })
+    .in("worked_reply_id", replyIds);
+
+  if (!isMounted) {
+    return;
+  }
+
+  if (workedAnswersError) {
+    console.error(
+      "Could not load answers that worked:",
+      workedAnswersError,
+    );
+    setWorkedAnswerCount(0);
+    return;
+  }
+
+  setWorkedAnswerCount(count ?? 0);
+}
   async function loadProfile() {
     setLoading(true);
     setLoadError("");
@@ -228,7 +258,13 @@ export default function ProfilePage() {
 
       const user = session.user;
 
-      setEmail(user.email ?? "");
+setEmail(user.email ?? "");
+
+await loadWorkedAnswerCount(user.id);
+
+if (!isMounted) {
+  return;
+}
 
       const { data, error: profileError } = await supabase
         .from("profiles")
@@ -281,7 +317,36 @@ export default function ProfilePage() {
       }
 
       setProfile(data);
-      setLoading(false);
+
+const { data: posts } = await supabase
+  .from("posts")
+  .select(`
+    id,
+    title,
+    body,
+    status,
+    created_at,
+    communities (
+      name,
+      slug
+    )
+  `)
+  .eq("author_id", user.id)
+  .order("created_at", { ascending: false });
+
+setUserPosts(
+  (posts ?? []).map((post: any) => ({
+    id: post.id,
+    title: post.title,
+    body: post.body,
+    status: post.status,
+    created_at: post.created_at,
+    community_name: post.communities.name,
+    community_slug: post.communities.slug,
+  }))
+);
+
+setLoading(false);
     } catch (error) {
       if (!isMounted) {
         return;
@@ -422,11 +487,7 @@ export default function ProfilePage() {
    * These fallbacks allow the redesigned page to work before you add
    * the future resolution fields to Supabase.
    */
-  const answersThatWorked =
-    profile.answers_that_worked ??
-    profile.resolutions_count ??
-    profile.thumbs_up_count ??
-    0;
+ const answersThatWorked = workedAnswerCount;
 
   const peopleRelated = profile.people_related ?? 0;
   const daysShownUp = profile.days_active ?? 0;
@@ -623,52 +684,54 @@ export default function ProfilePage() {
                     </h2>
                   </div>
 
-                  <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-gray-500">
-                    Under development
-                  </span>
+                  
                 </div>
 
                 <div className="mt-7 divide-y divide-white/10">
-                  {previewActivity.map((item) => (
+                  {userPosts.length === 0 ? (
+  <p className="text-gray-500">
+    You haven't created any posts yet.
+  </p>
+) : (
+  userPosts.map((post) => (
                     <article
-                      key={item.title}
-                      className="group py-6 first:pt-0 last:pb-0"
-                    >
-                      <div className="flex gap-4">
-                        <div
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border text-sm font-semibold ${
-                            item.type === "answer"
-                              ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-300"
-                              : item.type === "question"
-                                ? "border-violet-400/20 bg-violet-400/10 text-violet-300"
-                                : "border-sky-400/20 bg-sky-400/10 text-sky-300"
-                          }`}
-                        >
-                          {item.type === "answer"
-                            ? "✓"
-                            : item.type === "question"
-                              ? "?"
-                              : "•"}
-                        </div>
+  key={post.id}
+  className="group py-6 first:pt-0 last:pb-0"
+>
+  <Link href={`/posts/${post.id}`}>
 
-                        <div className="min-w-0">
-                          <div className="flex flex-wrap items-center gap-2">
-                            <p className="font-semibold text-gray-200">
-                              {item.title}
-                            </p>
+    <div className="flex items-center justify-between">
 
-                            <span className="text-xs text-gray-600">
-                              {item.community}
-                            </span>
-                          </div>
+      <div>
+        <p className="font-semibold text-white">
+          {post.title}
+        </p>
 
-                          <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-500">
-                            {item.detail}
-                          </p>
-                        </div>
-                      </div>
-                    </article>
-                  ))}
+        <p className="mt-2 text-sm text-gray-500">
+          {post.community_name}
+        </p>
+      </div>
+
+      {post.status === "resolved" ? (
+        <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-300">
+          ✓ Resolved
+        </span>
+      ) : (
+        <span className="rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
+          Open
+        </span>
+      )}
+
+    </div>
+
+    <p className="mt-4 line-clamp-2 text-gray-400">
+      {post.body}
+    </p>
+
+  </Link>
+</article>
+                  ))
+)}
                 </div>
               </section>
             </div>
